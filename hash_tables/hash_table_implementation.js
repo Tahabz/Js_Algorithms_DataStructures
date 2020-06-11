@@ -15,7 +15,11 @@ const HashTableFactory = function (size) {
                 if (!Array.isArray(this.data[adress]))
                     this.data[adress] = [key, value]
                 else
-                    this.data[adress].push([key, value])
+                {
+                    const arr = []
+                    arr.push(this.data[adress], [key, value])
+                    this.data[adress] = arr
+                }
             },
             get: function (key) {
                 const adress = hash.call(this, key)
@@ -24,8 +28,9 @@ const HashTableFactory = function (size) {
                     if (Array.isArray(currentBucket[0])) {
                         let i = 0
                         for (let element of currentBucket){
-                            if (element[i] === key)
-                                return element[i][1]
+                            if (element[0] === key)
+                                return element[1]
+                            i++;
                         }
                     } else
                         return currentBucket[1]
@@ -37,13 +42,10 @@ const HashTableFactory = function (size) {
 }
 
 const HashTable = HashTableFactory()
-const hashObj = HashTable(2)
+const hashObj = HashTable(10)
 
 hashObj.set('taha', '22')
 hashObj.set('baz', '244')
 
-console.log(hashObj.get('taha'));
-
-
-
+console.log(hashObj.get('baz'));
 
