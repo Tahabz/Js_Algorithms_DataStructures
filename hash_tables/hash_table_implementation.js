@@ -9,7 +9,7 @@ const _hash = function (key) {
 
 const makeHashTable = function (size) {
     return {
-        data: new Array(30),
+        data: new Array(size),
         set: function (key, value) {
             this.data[_hash.call(this, key)] = [key, value]
         },
@@ -29,3 +29,6 @@ hashObj.set('mohamed', '2')
 hashObj.set('hmida', '0')
 
 console.log(hashObj.get('taha'))
+console.log(hashObj.get('baz'))
+console.log(hashObj.get('hmida'))
+console.log(hashObj.get('mohamed'))
