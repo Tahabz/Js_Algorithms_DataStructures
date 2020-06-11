@@ -19,8 +19,17 @@ const HashTableFactory = function (size) {
             },
             get: function (key) {
                 const adress = hash.call(this, key)
-                if (Array.isArray(this.data[adress]))
-                    return this.data[adress][1]
+                const currentBucket = this.data[adress]
+                if (Array.isArray(currentBucket)){
+                    if (Array.isArray(currentBucket[0])) {
+                        let i = 0
+                        for (let element of currentBucket){
+                            if (element[i] === key)
+                                return element[i][1]
+                        }
+                    } else
+                        return currentBucket[1]
+                }
                 return undefined
             }
         }
@@ -34,5 +43,7 @@ hashObj.set('taha', '22')
 hashObj.set('baz', '244')
 
 console.log(hashObj.get('taha'));
-console.log(hashObj.get('baz'));
+
+
+
 
