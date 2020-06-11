@@ -11,14 +11,16 @@ const HashTableFactory = function (size) {
         return {
             data: new Array(size),
             set: function (key, value) {
-                if (!Array.isArray(this.data[hash.call(this, key)]))
-                    this.data[hash.call(this, key)] = [key, value]
+                const adress = hash.call(this, key)
+                if (!Array.isArray(this.data[adress]))
+                    this.data[adress] = [key, value]
                 else
-                    this.data[hash.call(this, key)].push([key, value])
+                    this.data[adress].push([key, value])
             },
             get: function (key) {
-                if (Array.isArray(this.data[hash.call(this, key)]))
-                    return this.data[hash.call(this, key)][1]
+                const adress = hash.call(this, key)
+                if (Array.isArray(this.data[adress]))
+                    return this.data[adress][1]
                 return undefined
             }
         }
