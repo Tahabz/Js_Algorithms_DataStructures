@@ -36,16 +36,31 @@ const HashTableFactory = function (size) {
                         return currentBucket[1]
                 }
                 return undefined
+            },
+            keys: function() {
+                const keys = []
+                for(let element of this.data){
+                    if (Array.isArray(element)) {
+                        if (Array.isArray(element[0])){
+                            element.forEach(el => {
+                                keys.push(el[0])
+                            })
+                        }
+                        else
+                            keys.push(element[0])
+                    }
+                }
+                return keys
             }
         }
     }
 }
 
 const HashTable = HashTableFactory()
-const hashObj = HashTable(10)
+const hashObj = HashTable(20)
 
 hashObj.set('taha', '22')
 hashObj.set('baz', '244')
 
-console.log(hashObj.get('baz'));
 
+console.log(hashObj.keys());
