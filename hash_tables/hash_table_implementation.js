@@ -11,7 +11,10 @@ const HashTableFactory = function (size) {
         return {
             data: new Array(size),
             set: function (key, value) {
-                this.data[hash.call(this, key)] = [key, value]
+                if (!Array.isArray(this.data[hash.call(this, key)]))
+                    this.data[hash.call(this, key)] = [key, value]
+                else
+                    this.data[hash.call(this, key)].push([key, value])
             },
             get: function (key) {
                 if (Array.isArray(this.data[hash.call(this, key)]))
@@ -23,14 +26,11 @@ const HashTableFactory = function (size) {
 }
 
 const HashTable = HashTableFactory()
-const hashObj = HashTable(30)
+const hashObj = HashTable(2)
 
 hashObj.set('taha', '22')
 hashObj.set('baz', '244')
-hashObj.set('mohamed', '2')
-hashObj.set('hmida', '0')
 
-console.log((hashObj.get('taha')))
-console.log((hashObj.get('baz')))
-console.log((hashObj.get('mohamed')))
-console.log((hashObj.get('hmida')))
+console.log(hashObj.get('taha'));
+console.log(hashObj.get('baz'));
+
