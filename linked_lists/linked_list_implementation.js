@@ -44,7 +44,7 @@ const linkedList = function (value) {
             return targetNode
         },
         insert(index, value) {
-            if (index == 1)
+            if (index <= 1)
                 return this.prepend(value)
             const newNode = {
                 value: value,
