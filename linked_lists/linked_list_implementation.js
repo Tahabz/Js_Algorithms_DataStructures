@@ -33,6 +33,8 @@ const linkedList = function (value) {
         getNodeAt(index) {
             if (index > this.length)
                 index = this.length
+            else if (index < 1)
+                index = 1
             let i = 1
             let targetNode = this.head
             while (i < index - 1) {
