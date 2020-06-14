@@ -37,7 +37,7 @@ const linkedList = function (value) {
                 index = 1
             let i = 1
             let targetNode = this.head
-            while (i < index - 1) {
+            while (i < index) {
                 targetNode = targetNode.next
                 i++
             }
@@ -50,19 +50,44 @@ const linkedList = function (value) {
                 value: value,
                 next: null
             }
-            let targetNode = this.getNodeAt(index)
+            let targetNode = this.getNodeAt(index - 1)
             let tempNode = targetNode.next
             targetNode.next = newNode
             newNode.next = tempNode
             return newNode
+        },
+        delete(index) {
+            if (index < 1)
+                index = 1
+            else if (index > this.length)
+                index = this.length
+            if (index === 1){
+                const tempNode = this.head
+                delete this.head
+                this.head = tempNode.next
+            }
+            else {
+                previousNode = this.getNodeAt(index - 1)
+                const tempNode = previousNode.next
+                delete previousNode.next
+                previousNode.next = tempNode.next
+                if (index === this.length)
+                    this.tail = previousNode
+            }
+            this.length--
         }
     }
     return obj
 }
 
+
+//                  [L1-->L2-->L3-->L4-->L5]     
+
+
+
 let newlist = linkedList(5)
 newlist.append(10)
 newlist.append(70)
-newlist.insert(2, 89)
-console.log(newlist);
+newlist.append(80)
+newlist.append(90)
 
