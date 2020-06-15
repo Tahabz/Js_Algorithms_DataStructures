@@ -5,9 +5,6 @@ const node = {
     }
 }
 
-const a = {
-    j(){}
-}
 const stack = {
     init() {
         this.top = null
