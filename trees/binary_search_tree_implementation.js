@@ -22,14 +22,14 @@ const tree = {
                 if (value < tempNode.value) {
                     if (tempNode.left === null) {
                         tempNode.left = newNode
-                        return
+                        return this
                     } else
                         tempNode = tempNode.left
                 }
                 else if (value > tempNode.value) {
                     if (tempNode.right === null) {
                         tempNode.right = newNode
-                        return
+                        return this
                     } else
                         tempNode = tempNode.right
                 }
