@@ -18,7 +18,7 @@ const tree = {
         }
         else {
             let tempNode = this.root
-            while (1 == 1) {
+            while (true) {
                 if (value < tempNode.value) {
                     if (tempNode.left === null) {
                         tempNode.left = newNode
