@@ -46,7 +46,7 @@ const tree = {
             else if (value > tempNode.value)
                 tempNode = tempNode.right
         }
-        return null
+        return false
     }
 }
 
