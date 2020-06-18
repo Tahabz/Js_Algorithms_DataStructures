@@ -7,23 +7,19 @@ const graph = {
         };
     },
     addVertex(node) {
-        this.adjacentList[node] = {}
+        this.adjacentList[node] = []
         this.numberOfNodes++
     },
     addEdge(node1, node2) {
         const fstNode = this.adjacentList[node1]
         const secNode = this.adjacentList[node2]
-        if (typeof fstNode.connections === 'undefined')
-            fstNode.connections = []
-        if (typeof secNode.connections === 'undefined')
-            secNode.connections = []
-        fstNode.connections.push(node2)
-        secNode.connections.push(node1)
+        fstNode.push(node2)
+        secNode.push(node1)
     },
     showConnections() {
         const allNodes = Object.keys(this.adjacentList);
         for (let node of allNodes) {
-            let nodeConnections = this.adjacentList[node].connections;
+            let nodeConnections = this.adjacentList[node];
             let connections = "";
             let vertex;
             for (vertex of nodeConnections) {
