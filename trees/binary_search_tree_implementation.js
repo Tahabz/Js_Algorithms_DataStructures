@@ -84,7 +84,7 @@ const tree = {
             }
         }
     },
-    breadthFirstSearch() {
+    BFSearch() {
         const list = []
         const queue = []
         queue.push(this.root)
@@ -97,6 +97,45 @@ const tree = {
             if (currentNode.right !== null) {
                 queue.push(currentNode.right)
             }
+        }
+        return list
+    },
+    DFSinOrder() {
+        return this.traverseInOrder(this.root, [])
+    },
+    DFSpreOrder() {
+        return this.traversePreOrder(this.root, [])
+    },
+    DFSpostOrder() {
+        return this.traversePostOrder(this.root, [])
+    },
+    traversePostOrder(node, list) {
+        if (node.left) {
+            this.traversePostOrder(node.left, list)
+        }
+        if (node.right) {
+            this.traversePostOrder(node.right, list)
+        }
+        list.push(node.value)
+        return list
+    },
+    traversePreOrder(node, list) {
+        list.push(node.value)
+        if (node.left) {
+            this.traversePreOrder(node.left, list)
+        }
+        if (node.right) {
+            this.traversePreOrder(node.right, list)
+        }
+        return list
+    },
+    traverseInOrder(node, list) {
+        if (node.left) {
+            this.traverseInOrder(node.left, list)
+        }
+        list.push(node.value)
+        if (node.right) {
+            this.traverseInOrder(node.right, list)
         }
         return list
     },
@@ -120,7 +159,7 @@ mytree.insert(170)
 //  4     20
 //1  6  15  170
 
-console.log(mytree.breadthFirstSearch())
+console.log(mytree.DFSpostOrder())
 
 
 function mytraverse(node) {
