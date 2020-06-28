@@ -84,43 +84,23 @@ const tree = {
             }
         }
     },
-    remove(value) {
-        let node = this.lookupToRemove(value)
-        let nodeToRemove = node.nodeToRemove
-        let parentNode = node.parentNode
-        let childParentNode = {
-            dir: 0
-        }
-        while (true) {
-            if (nodeToRemove.right === null) {
-                if (nodeToRemove.left === null) {
-                    if (childParentNode.dir !== 0) {
-                        let parrentdir = parentNode.dir
-                        let temp = parentNode.node[parentNode.dir]
-                        parentNode.node[parrentdir] = nodeToRemove
-                        nodeToRemove.left = childParentNode.nodeToRemove[childParentNode.dir]
-                        childParentNode.nodeToRemove[childParentNode.dir] = null
-                    }
-                    else
-                        parentNode.node[parentNode.dir] = null
-                    return true
-                }
-                else {
-                    childParentNode = {
-                        nodeToRemove,
-                        dir: 'right'
-                    }
-                    nodeToRemove = nodeToRemove.left
-                }
-            } else {
-                childParentNode = {
-                    nodeToRemove,
-                    dir: 'left'
-                }
-                nodeToRemove = nodeToRemove.right
+    breadthFirstSearch() {
+        const list = []
+        const queue = []
+        queue.push(this.root)
+        while (queue.length > 0) {
+            let currentNode = queue.shift()
+            list.push(currentNode.value)
+            if (currentNode.left !== null) {
+                queue.push(currentNode.left)
+            }
+            if (currentNode.right !== null) {
+                queue.push(currentNode.right)
             }
         }
-    }
+        return list
+    },
+    
 }
 
 
@@ -134,13 +114,34 @@ mytree.insert(6)
 mytree.insert(15)
 mytree.insert(170)
 
-const a = mytree.remove(20)
 
-console.log(JSON.stringify(traverse(mytree.root)))
-
+//console.log(JSON.stringify(traverse(mytree.root)))
 //     9
 //  4     20
 //1  6  15  170
+
+console.log(mytree.breadthFirstSearch())
+
+
+function mytraverse(node) {
+    const tree = {
+        value: node.value
+    }
+    tree.left = node.left == null ? null : mytraverse(node.left)
+    tree.right = node.right == null ? null : mytraverse(node.right)
+    return tree
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function traverse(node) {
     const tree = { value: node.value };
